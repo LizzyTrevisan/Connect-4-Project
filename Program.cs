@@ -1,3 +1,9 @@
+/*Project Authors: 
+Larissa Quintilhano Nani
+Leiziane Trevisan Dardin
+Natasha Zimmermann
+*/
+
 using System.Text;
 
 public class ConnectFourProject
