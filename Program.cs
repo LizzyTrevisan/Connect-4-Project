@@ -1,8 +1,6 @@
-﻿using System;
 using System.Text;
-using System.Threading; // Add this to use Thread.Sleep
 
-public class GameController
+public class ConnectFourProject
 {
     private GameBoard board;
     private Player player1;
@@ -10,7 +8,7 @@ public class GameController
     private Player currentPlayer;
     private ConsoleUI ui;
 
-    public GameController()
+    public ConnectFourProject()
     {
         board = new GameBoard();
         ui = new ConsoleUI();
@@ -27,12 +25,12 @@ public class GameController
 
             if (currentPlayer == player1)
             {
-                ui.PrintMessage("Your turn"); //Prints Human's turn
+                Console.WriteLine("Your turn"); //Prints Human's turn
             }
             else
             {
-                ui.PrintMessage("PC turn");
-                Thread.Sleep(3000); // it will provide 3 seconds delay for the computer's turn - reference of the source at the end
+                Console.WriteLine("PC turn ...");
+                Thread.Sleep(2000); // it will provide 2 seconds delay for the computer's turn - reference of the source at the end
             }
 
             int column;
@@ -43,14 +41,14 @@ public class GameController
                 {
                     break; // if a Valid move made, it will break out of the loop
                 }
-                ui.PrintMessage("Invalid move, try again.");
+                Console.WriteLine("Invalid move, try again.");
             }
 
             if (board.CheckWin(currentPlayer.Symbol))//Set who won and accordingly to the emoji color.
             {
                 ui.PrintBoard(board);
                 SetWinColor(currentPlayer.Symbol);
-                ui.PrintMessage($"{currentPlayer.Symbol} wins!");
+                Console.WriteLine($"{currentPlayer.Symbol} wins!");
                 Console.ResetColor(); //It will reset color of the emoji
                 break; // the Game over function, current player wins
             }
@@ -58,7 +56,7 @@ public class GameController
             if (board.IsFull())
             {
                 ui.PrintBoard(board);
-                ui.PrintMessage("It's a draw!");
+                Console.WriteLine("It's a draw!");
                 break; // Game over if statement in case the board is full and no winners
             }
 
@@ -67,7 +65,7 @@ public class GameController
         }
     }
 
-    private void SetWinColor(char symbol) //SetWinColor fuction called above used for the winner if the Computer wins the result is in red otherwise Human won and it will be in blue. 
+    private void SetWinColor(char symbol) //SetWinColor fuction called above used for the winner if the Computer wins the result is in red otherwise Human won and it will be in blue.
     {
         if (symbol == '\u2B24')
         {
@@ -119,7 +117,7 @@ public class GameController
             return CheckHorizontalWin(symbol) || CheckVerticalWin(symbol) || CheckDiagonalWin(symbol);
         }
 
-        private bool CheckHorizontalWin(char symbol) //Checking the horizontal possibility win function iterating 
+        private bool CheckHorizontalWin(char symbol) //Checking the horizontal possibility win function iterating
         {
             for (int r = 0; r < rows; r++)
             {
@@ -232,7 +230,7 @@ public class GameController
             int col;
             do
             {
-                col = random.Next(0, 7);
+                col = random.Next(0, 6);
             } while (!IsColumnValid(col));
             return col;
         }
@@ -287,7 +285,6 @@ public class GameController
 
         public int GetMove()
         {
-            // Console.WriteLine("Your Turn");
             Console.WriteLine("Enter a column (0-6): "); //Prints the instruction to the player
             int column;
             while (!int.TryParse(Console.ReadLine(), out column) || column < 0 || column > 6)
@@ -307,7 +304,7 @@ public class GameController
     public static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8; // Ensure the console uses UTF-8 encoding for the symbols to work
-        GameController game = new GameController();
+        ConnectFourProject game = new ConnectFourProject();
         game.PlayGame();
     }
 }
