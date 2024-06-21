@@ -299,13 +299,7 @@ public class ConnectFourProject
             }
             return column;
         }
-
-        public void PrintMessage(string message)
-        {
-            Console.WriteLine(message);
-        }
     }
-
 
     public static void Main()
     {
