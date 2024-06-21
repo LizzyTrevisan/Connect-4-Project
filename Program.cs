@@ -3,8 +3,9 @@ Larissa Quintilhano Nani
 Leiziane Trevisan Dardin
 Natasha Zimmermann
 */
-
+using System;
 using System.Text;
+using System.Threading;
 
 public class ConnectFourProject
 {
